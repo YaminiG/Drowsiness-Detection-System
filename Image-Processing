@@ -1,0 +1,132 @@
+clc
+F = MENU('Choose a database set','Test Set','Train Set'); if F==1
+K = MENU('Choose a file','Test A','Test V','Test W','Test 0','Test 1','Test From other DBs');
+if K == 1
+   loop=4
+   for i=1:loop
+   string = ['test\a\' num2str(i) '.tif'];
+   Rimages{i} = imread(string);
+end
+elseif K == 2
+   loop=7
+   for i=1:loop
+   string = ['test\v\' num2str(i) '.tif'];
+   Rimages{i} = imread(string);
+end
+elseif K == 3
+   loop=5
+   for i=1:loop
+      string = ['Test\W\' num2str(i) '.tif'];
+      Rimages{i} = imread(string);
+end
+elseif K == 4
+   loop=5
+   for i=1:loop
+      string = ['test\0\' num2str(i) '.tif'];
+      Rimages{i} = imread(string);
+end
+elseif K == 5
+   loop=4
+   for i=1:loop
+      string = ['test\1\' num2str(i) '.tif'];
+      Rimages{i} = imread(string);
+end
+elseif K == 6
+   loop=13
+   for i=1:loop
+string = ['test\otherdb\' num2str(i) '.tif'];
+
+Rimages{i} = imread(string);
+end
+end
+end;
+%% Select Train Set
+if F==2
+   loop=3   %Set loop to 3. All train sets have 3 images
+L = MENU('Choose a file','Train A','Train V','Train W','Train 0','Train 1');
+if L == 1
+   for i=1:loop
+   string = ['train\a\' num2str(i) '.tif'];
+   Rimages{i} = imread(string);
+end
+elseif L == 2
+   for i=1:loop
+   string = ['train\v\' num2str(i) '.tif'];
+   Rimages{i} = imread(string);
+end
+elseif L == 3
+   for i=1:loop
+      string = ['train\W\' num2str(i) '.tif'];
+      Rimages{i} = imread(string);
+end
+elseif L == 4
+   for i=1:loop
+      string = ['train\0\' num2str(i) '.tif'];
+      Rimages{i} = imread(string);
+end
+elseif L == 5
+   for i=1:loop
+ string = ['train\1\' num2str(i) '.tif'];
+Rimages{i} = imread(string);
+end end end
+%  Resize all images to 150x140
+T{i}=imresize(Timages{i},[150,140]);
+   x = [0 -1 1];
+   y = [0 1 -1]';
+dx{i} = convn(T{i},x,'same');
+dy{i} = convn(T{i},y,'same');
+gradient{i} = dy{i} ./dx{i};
+theta{i} = atan(gradient{i}); 
+cl{i}= im2col(theta{i},[1 1],'distinct'); % convert radians to degrees
+   N{i} = (cl{i}*180)/3.14159265359;
+   c1{i}=(N{i}>0)&(N{i}<10);
+   s1{i}=sum(c1{i});
+   c2{i}=(N{i}>10.0001)&(N{i}<20);
+   s2{i}=sum(c2{i});
+   c3{i}=(N{i}>20.0001)&(N{i}<30);
+   sum(c3{i});
+   s3{i}=sum(c3{i});
+   c4{i}=(N{i}>30.0001)&(N{i}<40);
+   sum(c4{i});
+   s4{i}=sum(c4{i});
+   c5{i}=(N{i}>40.0001)&(N{i}<50);
+   sum(c5{i});
+   s5{i}=sum(c5{i});
+   c6{i}=(N{i}>50.0001)&(N{i}<60);
+   sum(c6{i});
+   s6{i}=sum(c6{i});
+   c7{i}=(N{i}>60.0001)&(N{i}<70);
+   sum(c7{i});
+   s7{i}=sum(c7{i});
+   c8{i}=(N{i}>70.0001)&(N{i}<80);
+   sum(c8{i});
+   s8{i}=sum(c8{i});
+   c9{i}=(N{i}>80.0001)&(N{i}<90);
+   sum(c9{i});
+   s9{i}=sum(c9{i});
+c10{i}=(N{i}>90.0001)&(N{i}<100); sum(c10{i});
+s10{i}=sum(c10{i});
+   c11{i}=(N{i}>-89.9)&(N{i}<-80);
+   sum(c11{i});
+   s11{i}=sum(c11{i});
+   c12{i}=(N{i}>-80.0001)&(N{i}<-70); sum(c12{i});
+s12{i}=sum(c12{i});
+c13{i}=(N{i}>-70.0001)&(N{i}<-60); sum(c13{i});
+s13{i}=sum(c13{i});
+c14{i}=(N{i}>-60.0001)&(N{i}<-50); sum(c14{i});
+s14{i}=sum(c14{i});
+c15{i}=(N{i}>-50.0001)&(N{i}<-40); sum(c15{i});
+s15{i}=sum(c15{i});
+c16{i}=(N{i}>-40.0001)&(N{i}<-30); sum(c16{i});
+s16{i}=sum(c16{i});
+c17{i}=(N{i}>-30.0001)&(N{i}<-20); sum(c17{i});
+s17{i}=sum(c17{i});
+c18{i}=(N{i}>-20.0001)&(N{i}<-10); sum(c18{i});
+s18{i}=sum(c18{i});
+c19{i}=(N{i}>-10.0001)&(N{i}<-0.0001); sum(c19{i});
+s19{i}=sum(c19{i});
+D{i}= [s1{i} s2{i} s3{i} s4{i} s5{i} s6{i} s7{i} s8{i} s9{i} s10{i} s11{i} s12{i} s13{i} s14{i} s15{i} s16{i} s17{i} s18{i} s19{i}];
+end;
+end;
+end;
+close(w);
