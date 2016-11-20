@@ -1,0 +1,74 @@
+
+echo on
+clc
+clc
+pause 
+clc
+P1 = fscanf(fid,'%f',[19,inf]);
+P=P1;
+fid = fopen('testA.txt','rt');
+TS1 = fscanf(fid,'%f',[19,inf]);
+fid = fopen('test0.txt','rt');
+TS2 = fscanf(fid,'%f',[19,inf]);
+fid = fopen('test5.txt','rt');
+TS3 = fscanf(fid,'%f',[19,inf]);
+fid = fopen('testL.txt','rt');
+TS4 = fscanf(fid,'%f',[19,inf]);
+fid = fopen('testV.txt','rt');
+TS5 = fscanf(fid,'%f',[19,inf]);
+fid = fopen('testW.txt','rt');
+TS6 = fscanf(fid,'%f',[19,inf]);
+fid = fopen('testH.txt','rt');
+TS7 = fscanf(fid,'%f',[19,inf]);
+fid = fopen('test1.txt','rt');
+TS8 = fscanf(fid,'%f',[19,inf]);
+fid = fopen('testGB.txt','rt');
+TS9 = fscanf(fid,'%f',[19,inf]);
+fid = fopen('target8.txt','rt');
+T = fscanf(fid,'%f',[8,inf]);
+S1 = 85;
+S2 = 5;
+[W1,b1] = initp(P,S1);
+[W2,b2] = initp(S1,T);
+pause 
+clc
+A1 = simup(P,W1,b1);
+TP = [1 500];
+pause
+clf reset
+figure(gcf)
+setfsize(600,300);
+%   Training 
+[W2,b2,epochs,errors] = trainp(W2,b2,A1,T,TP);
+pause 
+clc
+ploterr(errors);
+pause 
+clc
+K = MENU('Choose a file resolution','Test A','Test 0','Test 5','Test L','Test V','Test W','Test H','Test 1','Test GB');
+ if K == 1
+   TS = TS1;
+elseif K == 2
+   TS = TS2;
+elseif K == 3
+   TS = TS3;
+elseif K == 4
+   TS = TS4;
+elseif K == 5
+   TS = TS5;
+elseif K == 6
+   TS = TS6;
+elseif K == 7
+   TS = TS7;
+elseif K == 8
+   TS = TS8;
+   elseif K == 9
+   TS = TS9;
+else
+P = 0;
+R1 = 0;
+end
+a1 = simup(TS,W1,b1);
+a2 = simup(a1,W2,b2)
+echo off
+disp('End of Hand Gesture Recognition')
